@@ -1,0 +1,59 @@
+#calculator  {
+    width: 40%;
+    display: block;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    background-color: grey;
+    padding: 5%;
+}
+
+#display p {
+    border: 1px solid black;
+    background-color: white;
+    padding: 10px;
+    font-size: 140%;
+
+}
+
+
+.calculatorRow {
+    display: flex;
+}
+
+.calculatorButton
+{
+    width: 100%;
+    border: 1px solid black;
+    padding: 10px;
+}
+
+.calculatorButton.number{
+    background-color:white;
+    color:black;
+
+}
+
+.calculatorButton.number:hover{
+    background-color:rgba(255, 255, 255, 0.76);
+
+}
+.calculatorButton.operator{
+    background-color:rgba(0, 0, 255, 0.575);
+    color:white;
+    font-weight: bold;
+
+}
+
+.calculatorButton.operator:hover{
+    background-color:rgba(0, 0, 255, 0.24);
+}
+
+.calculatorButton.on{
+    background-color:black;
+    color:white;
+    font-weight: bold;
+
+}
+
+.calculatorButton.on:hover{
+    background-color:rgba(0, 0, 0, 0.698);
+}
