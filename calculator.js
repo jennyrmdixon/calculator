@@ -1,7 +1,8 @@
 //Define basic opeartor functions
 
 const add = function(num1, num2) {
-    return num1 + num2;
+  //fix to use numbers but return string
+    return +num1 + +num2;
       
   };
   
@@ -29,57 +30,65 @@ const add = function(num1, num2) {
   }
 
   //Populate display value
+  //After a solution, replace content with a different variable and clear display text content
+  //On next click, replace again with display content
   const display = document.querySelector('#display p');
   display.textContent = "";
 
   const calcButtons = document.querySelectorAll('.calculatorButton');
   calcButtons.forEach(calcButton => calcButton.addEventListener('click', () => {
-    if (calcButton.id === "clear" || calcButton.id === "="){
+    if (calcButton.id === "clear"){
       display.textContent = "";
     }
+
+    else if (calcButton.id === "="){
+      display.textContent = calculate();
+
+      calcButtons.forEach(calcButton => calcButton.addEventListener('click', () => {
+        if (calcButton.id === "clear"){
+          display.textContent = "";
+        }      
+        else {
+          display.textContent += `${calcButton.id}`;
+        }
+      }
+  ))
+    }
+    
     else {
       display.textContent += `${calcButton.id}`;
     }
   } 
-  ))
 
-  //Work in progress
-//Regex variable
-//const operators = value.match(+*-/);
+  ))  
 
-//Calculate answers
-// let calcAnswer = "";
+//edit for above logic:
+//if clear, reset textConent
+//if equals, equate function to calculate, then displays answer ("solution" string)
+//otherwise, update display text content
 
-// function runningTotoal (){
-//   if (hasNumber(display.textContent)){
-//     if ()
-//   }
-//   else{
-//     console.log("Reached else")
-//   }
-// }
+let calculate = function (){
+  let solution = display.textContent;
+  while (/[0-9]+[\+|\-|\*|\/][0-9]+/.test(solution)){
+    let firstEquation = solution.match(/[0-9]+[\+|\-|\*|\/][0-9]+/)[0];
+    let operatorPosition = firstEquation.search(/[\+|\-|\*|\/]/);
+    let num1 = firstEquation.slice(0,(operatorPosition));
+    let opeartor = firstEquation.slice(operatorPosition, (operatorPosition+1));
+    let num2 = firstEquation.slice((operatorPosition+1))
+    let tempSolution = operate (opeartor, num1, num2);
 
-//write a regular expression to match number plus operator plus another number plus equals
-
-//if there's a number, go to next step
-//if there's an operator, go to next step
-//if there's another number, go to next step
-//if there's an equal sign, use findsolution to find new number, and restart (should go past #1)
-
-//Run function upon page load
-
-//findsolution
-//search string for operator
-//identify the operator as a variable, and where it is in string
-//pull out everything before string as num 1
-//pull out everything after string as num 2
+    //finding part of display remaining
+    let remaining = solution.slice((firstEquation.length))
+    solution = tempSolution + remaining;
+}
+return solution;
+}
 
 
-//check if display text content has number, operator, another number
-//check what the operator is
-//use that to execute the operation
 
 
+//Next steps
+//Find a way to make the buttons start over on next use
   //Fix the display size
 
 
