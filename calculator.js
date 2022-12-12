@@ -10,7 +10,6 @@ const add = function(num1, num2) {
     return num1 - num2;
   };
   
-  
   const multiply = function(num1, num2) {
     return num1 * num2;
   };
@@ -29,46 +28,42 @@ const add = function(num1, num2) {
     }
   }
 
-  //Populate display value
-  //After a solution, replace content with a different variable and clear display text content
-  //On next click, replace again with display content
+  //Update display content
+
   const display = document.querySelector('#display p');
-  display.textContent = "";
+  let displayEntry = "";
+  let displaySolution = "";
+  display.textContent = displayEntry;
 
   const calcButtons = document.querySelectorAll('.calculatorButton');
   calcButtons.forEach(calcButton => calcButton.addEventListener('click', () => {
+   
     if (calcButton.id === "clear"){
-      display.textContent = "";
+      displayEntry = "";
+      display.textContent = displayEntry;
     }
 
     else if (calcButton.id === "="){
-      display.textContent = calculate();
-
-      calcButtons.forEach(calcButton => calcButton.addEventListener('click', () => {
-        if (calcButton.id === "clear"){
-          display.textContent = "";
-        }      
-        else {
-          display.textContent += `${calcButton.id}`;
-        }
+      //There is an equation - solve it
+      if  (/[0-9]+[\+|\-|\*|\/][0-9]+/.test(display.textContent)){
+      displaySolution = calculate();
+      displayEntry = displaySolution;
+      display.textContent = displaySolution;
       }
-  ))
     }
     
     else {
-      display.textContent += `${calcButton.id}`;
+      displayEntry+= `${calcButton.id}`;
+      display.textContent = displayEntry;
+       }
     }
-  } 
+  )) 
 
-  ))  
-
-//edit for above logic:
-//if clear, reset textConent
-//if equals, equate function to calculate, then displays answer ("solution" string)
-//otherwise, update display text content
+  //Execute calculations 
 
 let calculate = function (){
   let solution = display.textContent;
+
   while (/[0-9]+[\+|\-|\*|\/][0-9]+/.test(solution)){
     let firstEquation = solution.match(/[0-9]+[\+|\-|\*|\/][0-9]+/)[0];
     let operatorPosition = firstEquation.search(/[\+|\-|\*|\/]/);
@@ -76,8 +71,7 @@ let calculate = function (){
     let opeartor = firstEquation.slice(operatorPosition, (operatorPosition+1));
     let num2 = firstEquation.slice((operatorPosition+1))
     let tempSolution = operate (opeartor, num1, num2);
-
-    //finding part of display remaining
+console.log(tempSolution);
     let remaining = solution.slice((firstEquation.length))
     solution = tempSolution + remaining;
 }
@@ -85,11 +79,11 @@ return solution;
 }
 
 
-
-
-//Next steps
-//Find a way to make the buttons start over on next use
-  //Fix the display size
-
-
-
+//Extra credit
+//Center the calculator, make it look nice
+//Add decimal button but limit to 1 per number
+//Add backspace button
+//Add keyboard support
+//Clear after entering a new number
+//Check for bugs
+//Clean up
