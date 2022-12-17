@@ -33,28 +33,49 @@ const add = function(num1, num2) {
   const display = document.querySelector('#display p');
   let displayEntry = "";
   let displaySolution = "";
+  let decimalAvailable = true;
   display.textContent = displayEntry;
 
   const calcButtons = document.querySelectorAll('.calculatorButton');
   calcButtons.forEach(calcButton => calcButton.addEventListener('click', () => {
-   
+
     if (calcButton.id === "clear"){
       displayEntry = "";
       display.textContent = displayEntry;
     }
 
     else if (calcButton.id === "="){
-      //There is an equation - solve it
+      //Executes only if display contains an equation
       if  (/[0-9]+[\+|\-|\*|\/][0-9]+/.test(display.textContent)){
       displaySolution = calculate();
       displayEntry = displaySolution;
       display.textContent = displaySolution;
       }
     }
-    
-    else {
-      displayEntry+= `${calcButton.id}`;
+
+  //Starting over with new number after solution: Only execute if the key is not decimal, or if the last entered number does not contain a decimal
+    else if (display.textContent === displaySolution && (calcButton.classList[1] === "number" || (calcButton.classList[1] === "decimal" && decimalAvailable === true))) {
+        displayEntry = `${calcButton.id}`;
+        display.textContent = displayEntry;
+
+        if (calcButton.id === "."){
+          decimalAvailable = false;
+        }
+      }
+
+  //Adding any other digit or operator: Only execute if the key is not decimal, or if the last entered number does not contain a decimal
+  else if (calcButton.id !== "." || decimalAvailable === true) {
+      displayEntry += `${calcButton.id}`;
       display.textContent = displayEntry;
+
+      if (calcButton.id === "."){
+        decimalAvailable = false;
+      }
+      if (calcButton.classList[1] === "operator"){
+        decimalAvailable = true;
+      }
+
+
        }
     }
   )) 
@@ -80,10 +101,6 @@ return solution;
 
 
 //Extra credit
-//Center the calculator, make it look nice
-//Add decimal button but limit to 1 per number
-//Add backspace button
 //Add keyboard support
-//Clear after entering a new number
 //Check for bugs
-//Clean up
+//Clean up code

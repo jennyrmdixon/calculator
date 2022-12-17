@@ -15,6 +15,10 @@
 
 }
 
+#calculator {
+    margin-left: auto;
+    margin-right: auto;
+}
 
 .calculatorRow {
     display: flex;
@@ -48,6 +52,17 @@
     background-color:rgba(0, 0, 255, 0.24);
 }
 
+.calculatorButton.decimal{
+    background-color:rgba(0, 0, 255, 0.575);
+    color:white;
+    font-weight: bold;
+
+}
+
+.calculatorButton.decimal:hover{
+    background-color:rgba(0, 0, 255, 0.24);
+}
+
 .calculatorButton.on{
     background-color:black;
     color:white;
@@ -57,4 +72,12 @@
 
 .calculatorButton.on:hover{
     background-color:rgba(0, 0, 0, 0.698);
+}
+
+.calculatorButton.equals{
+    background-color:rgb(76, 40, 143);
+}
+
+.calculatorButton.equals:hover{
+    background-color:rgba(76, 40, 143 0.698);
 }
