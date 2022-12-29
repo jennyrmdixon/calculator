@@ -12,7 +12,9 @@
     padding: 20px;
     height:30px;
     font-size: 140%;
-
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 
 #calculator {
@@ -61,13 +63,6 @@
 
 .calculatorButton.decimal:hover{
     background-color:rgba(0, 0, 255, 0.24);
-}
-
-.calculatorButton.on{
-    background-color:black;
-    color:white;
-    font-weight: bold;
-
 }
 
 .calculatorButton.on:hover{
